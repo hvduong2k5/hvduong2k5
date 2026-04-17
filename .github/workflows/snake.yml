@@ -1,0 +1,62 @@
+name: GitHub Snake Game
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-animations:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Generate GitHub Contributions Snake Animations
+        uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            # 1. Chế độ cơ bản (Light/Dark tự động)
+            dist/github-snake.svg
+            dist/github-snake-dark.svg?palette=github-dark
+            
+            # 2. Theme Đại dương (Ocean)
+            dist/ocean-snake.gif?color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
+            
+            # 3. Theme Cyberpunk 
+            #dist/cyberpunk-snake.svg?color_snake=#ff00ff&color_dots=#161b22,#003300,#006600,#009900,#00ff00
+            
+            # 4. Theme Halloween 
+            #dist/halloween-snake.svg?color_snake=#8a2be2&color_dots=#161b22,#ffdf00,#ff9a00,#ff5a00,#ff0000
+
+            # 5. Theme Tết (Lunar New Year) 
+            #dist/tet-holiday-snake.svg?color_snake=#ffd700&color_dots=#161b22,#ffb3ba,#ff4d4d,#e60000,#b30000
+
+            # 6. Theme Mùa Hè (Summer Time)
+            #dist/summer-snake.svg?color_snake=#00e5ff&color_dots=#161b22,#fff4b3,#ffcc00,#ff9900,#ff3300
+
+            # 7. Theme Mùa Thu (Autumn Time)
+            #dist/autumn-snake.svg?color_snake=#ff4500&color_dots=#161b22,#ffebcd,#ffa500,#ff8c00,#8b0000
+
+            # 8. Theme Mùa Đông (Winter Time)
+            #dist/winter-snake.svg?color_snake=#ffffff&color_dots=#161b22,#add8e6,#87ceeb,#4682b4,#000080
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to Output Branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: output
+          keep_files: false
+          commit_message: "Update snake animation [skip ci]"
