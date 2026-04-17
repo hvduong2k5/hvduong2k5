@@ -2,7 +2,6 @@
 
 ### A Java developer
 
-
 <h3 align="left">Connect with me:</h3>
 <table>
 <tr>
@@ -26,6 +25,7 @@
 </td>
 </tr>
 </table>
+<img src="https://github.com/hvduong2k5/hvduong2k5/blob/output/github-snake.svg" width="100%" />
 
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=hvduong2k5&" alt="hvduong2k5" /></p>
+<p ><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=hvduong2k5&" alt="hvduong2k5" width="100%"/></p>
 
